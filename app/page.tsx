@@ -101,7 +101,7 @@ function WhyTEM() {
           Why Technical Enablement Manager?
         </h2>
         <p className="text-slate-400 mt-2 text-base lg:text-lg">
-          Three focused initiatives. One north star: make every AW, SE and SA impossible to outgun.
+          Three focused initiatives. One north star: make every AE, SE and SA impossible to outgun.
         </p>
       </div>
 
