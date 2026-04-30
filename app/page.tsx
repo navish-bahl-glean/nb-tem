@@ -665,6 +665,11 @@ export default function Page() {
     }, 240);
   }, []);
 
+  const SEQUENCE: (ActiveTab | null)[] = [null, 'tem', 'now', 'me'];
+  const currentIndex = SEQUENCE.indexOf(active);
+  const nextValue = currentIndex < SEQUENCE.length - 1 ? SEQUENCE[currentIndex + 1] : null;
+  const nextLabel = nextValue === 'tem' ? 'Why TEM?' : nextValue === 'now' ? 'Why Now?' : nextValue === 'me' ? 'Why Me?' : null;
+
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-[#05091A] dot-grid">
 
@@ -757,24 +762,25 @@ export default function Page() {
         </div>
       </main>
 
-      {/* ── Footer progress strip ── */}
-      {active !== null && (
-        <footer className="relative z-50 flex-shrink-0 h-10 border-t border-white/5 backdrop-blur-xl bg-[#05091A]/60 flex items-center px-6">
-          <div className="max-w-7xl mx-auto w-full flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              {NAV_TABS.map((tab, i) => (
+      {/* ── Footer ── */}
+      <footer className="relative z-50 flex-shrink-0 h-12 border-t border-white/5 backdrop-blur-xl bg-[#05091A]/60 flex items-center px-6">
+        <div className="max-w-7xl mx-auto w-full flex items-center justify-between gap-4">
+          {/* Progress strip (sections only) */}
+          <div className="flex items-center gap-3">
+            {active !== null ? (
+              NAV_TABS.map((tab, i) => (
                 <button
                   key={tab.id}
                   onClick={() => switchTab(tab.id)}
                   className="flex items-center gap-1.5 group"
                 >
                   <div
-                    className={`w-5 h-0.5 rounded-full transition-all duration-300 ${
+                    className={`h-0.5 rounded-full transition-all duration-300 ${
                       active === tab.id
                         ? 'bg-violet-400 w-8'
                         : NAV_TABS.findIndex((t) => t.id === active) > i
-                        ? 'bg-violet-600/50'
-                        : 'bg-white/10'
+                        ? 'bg-violet-600/50 w-5'
+                        : 'bg-white/10 w-5'
                     }`}
                   />
                   <span
@@ -785,15 +791,27 @@ export default function Page() {
                     {tab.label}
                   </span>
                 </button>
-              ))}
-            </div>
-            <div className="flex items-center gap-1 text-slate-600 text-[10px]">
-              <Users className="w-3 h-3" />
-              <span>Navish Bahl · Glean · 2026</span>
-            </div>
+              ))
+            ) : (
+              <div className="flex items-center gap-1 text-slate-600 text-[10px]">
+                <Users className="w-3 h-3" />
+                <span>Navish Bahl · Glean · 2026</span>
+              </div>
+            )}
           </div>
-        </footer>
-      )}
+
+          {/* Next button */}
+          {nextLabel && (
+            <button
+              onClick={() => nextValue ? switchTab(nextValue) : goHome()}
+              className="group flex items-center gap-2 px-4 py-1.5 rounded-lg bg-violet-600 hover:bg-violet-500 text-white font-semibold text-xs transition-all duration-200 shadow-md shadow-violet-500/25 hover:shadow-violet-500/40 hover:-translate-y-0.5"
+            >
+              {nextLabel}
+              <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            </button>
+          )}
+        </div>
+      </footer>
     </div>
   );
 }
