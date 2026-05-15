@@ -7,6 +7,12 @@
       "runtimeArgs": ["run", "dev"],
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "kingdom-of-travel",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "kingdom-of-travel", "-p", "3001", "--no-clipboard"],
+      "port": 3001
     }
   ]
 }

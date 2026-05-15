@@ -4,7 +4,10 @@
       "Bash(npx next *)",
       "Bash(curl -s http://localhost:3456)",
       "mcp__Claude_in_Chrome__tabs_context_mcp",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:princeoftravel.com)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
